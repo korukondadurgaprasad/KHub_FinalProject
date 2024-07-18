@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration and Login</title>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        /* Center content vertically and horizontally */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .input-container {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .success-message {
+            color: green;
+            margin: 20px 0;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .login-container {
+            margin-top: 20px;
+        }
+
+        /* Login form submit button styling */
+        #loginForm button[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 12px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        #loginForm button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Registration Form</h2>
+        <form action="/register" method="post" id="registerForm" autocomplete="off">
+            <div class="input-container">
+                <label for="register-name">Name</label>
+                <input type="text" id="register-name" name="name" required autocomplete="off">
+            </div>
+            <div class="input-container">
+                <label for="register-email">Email</label>
+                <input type="email" id="register-email" name="email" required autocomplete="off">
+            </div>
+            <div class="input-container">
+                <label for="register-username">Username</label>
+                <input type="text" id="register-username" name="username" required autocomplete="off">
+            </div>
+            <div class="input-container">
+                <label for="register-password">Password</label>
+                <input type="password" id="register-password" name="password" required autocomplete="new-password">
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+
+        <div id="successMessage" class="success-message hidden">
+            Successfully registered! Now click on login.
+        </div>
+
+        <button id="loginButton" class="hidden" onclick="showLoginForm()">Login</button>
+
+        <div class="login-container hidden" id="loginContainer">
+            <h2>Login</h2>
+            <form action="/login" method="post" id="loginForm" autocomplete="off">
+                <div class="input-container">
+                    <label for="login-username">Username</label>
+                    <input type="text" id="login-username" name="username" required autocomplete="off">
+                </div>
+                <div class="input-container">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" name="password" required autocomplete="new-password">
+                </div>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('registerForm').reset();
+        });
+
+        document.getElementById('registerForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            document.getElementById('registerForm').classList.add('hidden');
+            document.getElementById('successMessage').classList.remove('hidden');
+            document.getElementById('loginButton').classList.remove('hidden');
+        });
+
+        function showLoginForm() {
+            document.getElementById('successMessage').classList.add('hidden');
+            document.getElementById('loginButton').classList.add('hidden');
+            document.getElementById('loginContainer').classList.remove('hidden');
+            document.getElementById('loginForm').reset(); // Reset the login form fields
+        }
+    </script>
+</body>
+
+</html>
